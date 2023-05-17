@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouteObject } from "react-router-dom";
+import { createHashRouter, RouteObject } from "react-router-dom";
 import Home from "./pages/Home.tsx";
 import Layout from "./pages/Layout.tsx";
 
@@ -21,5 +21,5 @@ const routes: RouteObject[] =
     },
   ];
 
-const router = createBrowserRouter(routes, { basename: import.meta.env.BASE_URL });
+const router = createHashRouter(routes, { basename: import.meta.env.BASE_URL });
 export default router;
