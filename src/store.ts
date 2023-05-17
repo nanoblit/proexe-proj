@@ -14,10 +14,14 @@ export const userSlice = createSlice({
       state.users.push({ ...action.payload, id: nextId });
     },
     editUser: (state, action: PayloadAction<User>) => {
-      state.users[action.payload.id] = action.payload;
+      state.users = state.users.map(
+        user => user.id === action.payload.id ? action.payload : user,
+      );
     },
     deleteUser: (state, action: PayloadAction<number>) => {
-      state.users = state.users.filter(({ id }) => id !== action.payload);
+      state.users = state.users.filter(
+        ({ id }) => id !== action.payload,
+      );
     },
   },
 });
