@@ -1,16 +1,5 @@
 import { configureStore, createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-interface User {
-  id: number,
-  name: string,
-  username: string,
-  email: string,
-  city: string
-}
-
-interface UserState {
-  users: User[];
-}
+import { User, UserState } from "./interfaces.ts";
 
 const initialState: UserState = {
   users: [],
