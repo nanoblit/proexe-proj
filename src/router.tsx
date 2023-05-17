@@ -4,7 +4,7 @@ import Home from "./pages/Home.tsx";
 
 const router = createBrowserRouter([
   {
-    path: "/proexe-proj",
+    path: "/proj11321321",
     element: <Layout/>,
     children: [
       {
