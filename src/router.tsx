@@ -4,7 +4,7 @@ import Layout from "./pages/Layout.tsx";
 
 const routes: RouteObject[] = [
   {
-    path: "/",
+    path: "",
     element: <Layout/>,
     errorElement: <>404</>,
     children: [
