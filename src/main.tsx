@@ -5,6 +5,7 @@ import { store } from "./store.ts";
 import { RouterProvider } from "react-router-dom";
 import router from "./router.tsx";
 import { CssBaseline } from "@mui/material";
+import "./main.css";
 
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
