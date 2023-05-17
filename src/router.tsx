@@ -1,10 +1,10 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createHashRouter } from "react-router-dom";
 import Layout from "./pages/Layout.tsx";
 import Home from "./pages/Home.tsx";
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
-    path: "/proj11321321",
+    path: "/",
     element: <Layout/>,
     children: [
       {
