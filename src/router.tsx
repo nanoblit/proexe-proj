@@ -1,30 +1,28 @@
 import { createBrowserRouter, createHashRouter, RouteObject } from "react-router-dom";
-import Layout from "./pages/Layout.tsx";
 import Home from "./pages/Home.tsx";
+import Layout from "./pages/Layout.tsx";
 
 const routes: RouteObject[] = [
   {
-    path: "proj11321321",
+    path: "/",
+    element: <Layout/>,
     errorElement: <>404</>,
     children: [
       {
-        path: "proj11321321",
-        element: <Layout/>,
-        children: [
-          {
-            path: "",
-            element: <Home/>,
-          },
-          {
-            path: "form",
-            element: <>form</>,
-          },
-        ],
+        path: "",
+        element: <Home/>,
+      },
+      {
+        path: "form",
+        element: <>form</>,
       },
     ],
   },
 ];
 
-const router = import.meta.env.DEV ? createBrowserRouter(routes) : createHashRouter(routes);
+const options = { basename: import.meta.env.BASE_URL };
 
+const router = import.meta.env.DEV ? createBrowserRouter(routes, options) : createHashRouter(routes, options);
+
+console.log(import.meta.env.BASE_URL);
 export default router;
