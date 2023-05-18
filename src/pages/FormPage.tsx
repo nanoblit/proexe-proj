@@ -17,7 +17,7 @@ export default function FormPage() {
   }
 
   return (
-    <Panel header="FormPage">
+    <Panel header="Form">
       <Box className="flex flex-col gap-y-5">
         <UserForm defaultData={user}/>
       </Box>
