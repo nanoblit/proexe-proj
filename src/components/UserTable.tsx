@@ -1,7 +1,7 @@
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { Button } from "@mui/material";
 import { useTypedSelector } from "../hooks/useTypedSelector.ts";
-import { User } from "../helpers/types.ts";
+import { User } from "../types.ts";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import DeleteUserDialog from "./DeleteUserDialog.tsx";

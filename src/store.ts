@@ -1,6 +1,6 @@
 import { configureStore, createAsyncThunk, createSlice, PayloadAction, ThunkDispatch } from "@reduxjs/toolkit";
 import { AnyAction } from "redux";
-import { FetchStatus, User, UserData, UserState } from "./helpers/types.ts";
+import { FetchStatus, User, UserData, UserFormData, UserState } from "./types.ts";
 import { Dispatch } from "react";
 
 const initialState: UserState = {
@@ -31,7 +31,7 @@ export const userSlice = createSlice({
   name: "users",
   initialState,
   reducers: {
-    addUser: (state, action: PayloadAction<Omit<User, "id">>) => {
+    addUser: (state, action: PayloadAction<UserFormData>) => {
       const nextId = state.users[state.users.length - 1].id + 1;
       state.users.push({ ...action.payload, id: nextId });
     },

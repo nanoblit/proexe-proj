@@ -1,3 +1,13 @@
+import { UserFormData } from "../types.ts";
+
+export function useUserFormValidation(formData: UserFormData) {
+  const nameError = validateName(formData.name);
+  const emailError = validateEmail(formData.email);
+  const isError = Boolean(nameError) || Boolean(emailError);
+
+  return { nameError, emailError, isError };
+}
+
 const containsNumbersRegex = /\d/;
 
 export function validateName(name: string): string {

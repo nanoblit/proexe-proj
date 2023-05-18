@@ -1,16 +1,20 @@
-import { TextField } from "@mui/material";
-import { User } from "../helpers/types.ts";
+import { Box, Button, TextField } from "@mui/material";
+import { User, UserFormData } from "../types.ts";
 import { useState } from "react";
-import { validateEmail, validateName } from "../helpers/inputValidators.ts";
+import { Link, useNavigate } from "react-router-dom";
+import { addUser, editUser } from "../store.ts";
+import { useDispatch } from "react-redux";
+import { useUserFormValidation } from "../hooks/useUserFormValidation.ts";
 
 interface Props {
-  showValidation: boolean,
-  defaultData: Omit<User, "id"> | undefined,
-  onFormDataChanged: (formData: Omit<User, "id">, error: boolean) => void
+  defaultData: User | undefined,
 }
 
-export default function UserForm({ showValidation, defaultData, onFormDataChanged }: Props) {
-  const [formData, setFormData] = useState<Omit<User, "id">>(() => {
+export default function UserForm({ defaultData }: Props) {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const [formData, setFormData] = useState<UserFormData>(() => {
     if (defaultData) {
       return defaultData;
     }
@@ -22,19 +26,34 @@ export default function UserForm({ showValidation, defaultData, onFormDataChange
       city: "",
     };
   });
+  const [showValidation, setShowValidation] = useState(false);
 
-  const nameError = validateName(formData.name);
-  const emailError = validateEmail(formData.email);
-  const isError = Boolean(nameError) || Boolean(emailError);
+  const { nameError, emailError, isError } = useUserFormValidation(formData);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newFormData = {
-      ...formData,
+    setFormData((prev) => ({
+      ...prev,
       [event.target.name]: event.target.value.trim(),
-    };
+    }));
+  };
 
-    setFormData(newFormData);
-    onFormDataChanged(newFormData, isError);
+  const handleSubmit = () => {
+    if (!formData) {
+      return;
+    }
+
+    if (isError) {
+      return setShowValidation(true);
+    }
+
+    const newUser = defaultData === undefined;
+    if (newUser) {
+      dispatch(addUser(formData));
+    } else {
+      dispatch(editUser({ ...formData, id: defaultData.id }));
+    }
+
+    navigate("/");
   };
 
   return (
@@ -69,6 +88,12 @@ export default function UserForm({ showValidation, defaultData, onFormDataChange
         value={formData.city}
         onChange={handleChange}
       />
+      <Box className="flex justify-end gap-x-2">
+        <Link to="/">
+          <Button variant="outlined" color="error">Cancel</Button>
+        </Link>
+        <Button variant="contained" color="success" onClick={handleSubmit}>Submit</Button>
+      </Box>
     </>
   );
 }

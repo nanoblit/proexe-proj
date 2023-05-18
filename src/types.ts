@@ -27,8 +27,4 @@ export enum FetchStatus {
   ERROR = "ERROR"
 }
 
-export enum FormState {
-  NEW_USER = "NEW_USER",
-  EDITING_USER = "EDITING_USER",
-  ERROR = "ERROR"
-}
+export type UserFormData = Omit<User, "id">

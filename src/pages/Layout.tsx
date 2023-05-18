@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { AppDispatch, fetchUser } from "../store.ts";
 import { useTypedSelector } from "../hooks/useTypedSelector.ts";
-import { FetchStatus } from "../helpers/types.ts";
+import { FetchStatus } from "../types.ts";
 import AppSkeleton from "../components/AppSkeleton.tsx";
 
 export default function Layout() {
