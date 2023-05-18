@@ -1,9 +1,31 @@
-import { configureStore, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { User, UserState } from "./interfaces.ts";
+import { configureStore, createAsyncThunk, createSlice, PayloadAction, ThunkDispatch } from "@reduxjs/toolkit";
+import { AnyAction } from "redux";
+import { FetchStatus, User, UserData, UserState } from "./types.ts";
+import { Dispatch } from "react";
 
 const initialState: UserState = {
   users: [],
+  status: FetchStatus.NONE,
 };
+
+export const fetchUser = createAsyncThunk(
+  "users/fetchUser",
+  async () => {
+    const response = await fetch("https://my-json-server.typicode.com/karolkproexe/jsonplaceholderdb/data");
+    const data: UserData[] = await response.json();
+    const users: User[] = data.map(
+      ({ id, name, username, email, address }) => (
+        {
+          id,
+          name,
+          username,
+          email,
+          city: address.city,
+        }
+      ));
+    return users;
+  },
+);
 
 export const userSlice = createSlice({
   name: "users",
@@ -24,6 +46,19 @@ export const userSlice = createSlice({
       );
     },
   },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchUser.pending, (state) => {
+        state.status = FetchStatus.IN_PROGRESS;
+      })
+      .addCase(fetchUser.fulfilled, (state, action: PayloadAction<User[]>) => {
+        state.status = FetchStatus.SUCCESS;
+        state.users = action.payload;
+      })
+      .addCase(fetchUser.rejected, (state) => {
+        state.status = FetchStatus.ERROR;
+      });
+  },
 });
 
 export const { addUser, editUser, deleteUser } = userSlice.actions;
@@ -32,4 +67,6 @@ export const store = configureStore({
   reducer: userSlice.reducer,
 });
 
-export type RootStore = ReturnType<typeof store.getState>
+export type RootState = ReturnType<typeof store.getState>
+
+export type AppDispatch = ThunkDispatch<any, null | undefined, AnyAction> & Dispatch<AnyAction>;
