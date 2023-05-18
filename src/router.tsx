@@ -1,21 +1,27 @@
 import { createBrowserRouter } from "react-router-dom";
-import Home from "./pages/Home.tsx";
+import HomePage from "./pages/HomePage.tsx";
 import Layout from "./pages/Layout.tsx";
+import FormPage from "./pages/FormPage.tsx";
+import PageNotFound from "./pages/PageNotFound.tsx";
 
 const router = createBrowserRouter(
   [
     {
       path: "",
       element: <Layout/>,
-      errorElement: <>404</>,
+      errorElement: <PageNotFound/>,
       children: [
         {
           path: "",
-          element: <Home/>,
+          element: <HomePage/>,
         },
         {
           path: "form",
-          element: <>form</>,
+          element: <FormPage/>,
+        },
+        {
+          path: "form/:id",
+          element: <FormPage/>,
         },
       ],
     },

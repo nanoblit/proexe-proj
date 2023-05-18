@@ -22,8 +22,13 @@ export interface UserState {
 }
 
 export enum FetchStatus {
-  NONE = "NONE",
   IN_PROGRESS = "IN_PROGRESS",
   SUCCESS = "SUCCESS",
+  ERROR = "ERROR"
+}
+
+export enum FormState {
+  NEW_USER = "NEW_USER",
+  EDITING_USER = "EDITING_USER",
   ERROR = "ERROR"
 }
