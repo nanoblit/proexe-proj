@@ -22,11 +22,11 @@ export default function UserTable() {
   const columns: GridColDef[] = [
     { field: "id", headerName: "Id", width: 20 },
     { field: "name", headerName: "Name", flex: 1 },
-    { field: "username", headerName: "Username", sortable: true, flex: 1 },
+    { field: "username", headerName: "Username", flex: 1 },
     { field: "email", headerName: "Email", flex: 1 },
     { field: "city", headerName: "City", flex: 1 },
     {
-      field: "edit", headerName: "Edit", width: 100,
+      field: "edit", headerName: "Edit", width: 100, sortable: false,
       renderCell: (params) => {
         const id = (params.row as User).id;
         return (
@@ -37,7 +37,7 @@ export default function UserTable() {
       },
     },
     {
-      field: "delete", headerName: "Delete", width: 100,
+      field: "delete", headerName: "Delete", width: 100, sortable: false,
       renderCell: (params) => {
         const id = (params.row as User).id;
         return (
@@ -54,7 +54,7 @@ export default function UserTable() {
   return (
     <>
       <DeleteUserDialog userId={userIdToDelete} onClose={handleCloseDeleteUserDialog}/>
-      <DataGrid columns={columns} rows={users}/>
+      <DataGrid disableRowSelectionOnClick disableColumnMenu columns={columns} rows={users}/>
     </>
   );
 }
