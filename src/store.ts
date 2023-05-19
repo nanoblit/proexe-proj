@@ -32,7 +32,7 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     addUser: (state, action: PayloadAction<UserFormData>) => {
-      const nextId = state.users[state.users.length - 1].id + 1;
+      const nextId = state.users.length > 0 ? state.users[state.users.length - 1].id + 1 : 1;
       state.users.push({ ...action.payload, id: nextId });
     },
     editUser: (state, action: PayloadAction<User>) => {
