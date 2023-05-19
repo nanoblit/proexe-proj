@@ -1,7 +1,7 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText } from "@mui/material";
 import { useTypedSelector } from "../hooks/useTypedSelector.ts";
 import { useDispatch } from "react-redux";
-import { deleteUser } from "../store.ts";
+import { AppDispatch, deleteUser } from "../store.ts";
 
 interface Props {
   userId: number | null;
@@ -10,7 +10,7 @@ interface Props {
 
 export default function DeleteUserDialog({ userId, onClose }: Props) {
   const name = useTypedSelector(({ users }) => users.find(({ id }) => id === userId)?.name);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const handleDeleteUser = () => {
     if (userId !== null) {

@@ -2,7 +2,7 @@ import { Box, Button, TextField } from "@mui/material";
 import { User, UserFormData } from "../types.ts";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { addUser, editUser } from "../store.ts";
+import { addUser, AppDispatch, editUser } from "../store.ts";
 import { useDispatch } from "react-redux";
 import { useUserFormValidation } from "../hooks/useUserFormValidation.ts";
 
@@ -12,7 +12,7 @@ interface Props {
 
 export default function UserForm({ defaultData }: Props) {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const [formData, setFormData] = useState<UserFormData>(() => {
     if (defaultData) {
