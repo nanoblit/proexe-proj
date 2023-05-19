@@ -42,12 +42,12 @@ export default function UserForm({ defaultData }: Props) {
       return setShowValidation(true);
     }
 
-    const newUser = defaultData === undefined;
-    if (newUser) {
-      dispatch(addUser(formData));
-    } else {
-      dispatch(editUser({ ...formData, id: defaultData.id }));
-    }
+    const isNewUser = defaultData === undefined;
+    dispatch(
+      isNewUser
+        ? addUser(formData)
+        : editUser({ ...formData, id: defaultData.id }),
+    );
 
     navigate("/");
   };
