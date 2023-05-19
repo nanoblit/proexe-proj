@@ -4,7 +4,7 @@ import UserTable from "../components/UserTable.tsx";
 import { Link } from "react-router-dom";
 
 export default function HomePage() {
-  const addNewButton = (
+  const addNewUserButton = (
     <Link to="/form">
       <Button variant="contained">
         Add new
@@ -13,7 +13,7 @@ export default function HomePage() {
   );
 
   return (
-    <Panel header="User List" buttons={addNewButton}>
+    <Panel header="User List" buttons={addNewUserButton}>
       <UserTable/>
     </Panel>
   );

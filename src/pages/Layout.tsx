@@ -17,7 +17,7 @@ export default function Layout() {
 
   const content = {
     [FetchStatus.IN_PROGRESS]: <AppSkeleton/>,
-    [FetchStatus.ERROR]: <>There was an error while fetching users</>,
+    [FetchStatus.ERROR]: <p>There was an error while fetching users</p>,
     [FetchStatus.SUCCESS]: <Outlet/>,
   };
 

@@ -8,15 +8,15 @@ export function useUserFormValidation(formData: UserFormData) {
   return { nameError, emailError, isError };
 }
 
-const containsNumbersRegex = /\d/;
+const containsDigitsRegex = /\d/;
 
 export function validateName(name: string): string {
   if (isStringEmpty(name)) {
-    return "Name can't be empty";
+    return "The name can't be empty";
   }
 
-  if (containsNumbersRegex.test(name)) {
-    return "Name can't contain numbers";
+  if (containsDigitsRegex.test(name)) {
+    return "The name can't contain digits";
   }
 
   return "";
@@ -26,11 +26,11 @@ const validEmailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".
 
 export function validateEmail(email: string): string {
   if (isStringEmpty(email)) {
-    return "Email can't be empty";
+    return "The email can't be empty";
   }
 
   if (!validEmailRegex.test(email)) {
-    return "Email is incorrect";
+    return "The email is incorrect";
   }
 
   return "";

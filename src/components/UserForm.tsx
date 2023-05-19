@@ -38,10 +38,6 @@ export default function UserForm({ defaultData }: Props) {
   };
 
   const handleSubmit = () => {
-    if (!formData) {
-      return;
-    }
-
     if (isError) {
       return setShowValidation(true);
     }
